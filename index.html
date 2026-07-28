@@ -135,72 +135,8 @@
   .btn-solid:hover{background:var(--teal-deep); border-color:var(--teal-deep); transform:translateY(-2px);}
   .btn-ghost{background:transparent;color:var(--ink);}
   .btn-ghost:hover{background:var(--ink); color:var(--paper); transform:translateY(-2px);}
-
-  /* ---- mobile nav toggle ---- */
-  .nav-toggle{
-    display:none;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:5px;
-    width:40px;height:40px;
-    border-radius:50%;
-    border:1.5px solid var(--ink);
-    background:transparent;
-    cursor:pointer;
-    padding:0;
-    flex-shrink:0;
-  }
-  .nav-toggle span{
-    display:block;
-    width:18px;height:2px;
-    background:var(--ink);
-    border-radius:2px;
-    transition:transform .3s ease, opacity .3s ease;
-  }
-  header.nav.menu-open .nav-toggle span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
-  header.nav.menu-open .nav-toggle span:nth-child(2){ opacity:0; }
-  header.nav.menu-open .nav-toggle span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-
-  .mobile-menu{
-    display:none;
-    position:fixed;
-    top:0; left:0; right:0;
-    z-index:99;
-    background:var(--paper);
-    border-bottom:1px solid var(--line);
-    padding:88px clamp(20px,4vw,56px) 32px;
-    flex-direction:column;
-    gap:4px;
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .35s ease;
-  }
-  header.nav.menu-open + .mobile-menu{
-    max-height:80vh;
-    overflow-y:auto;
-  }
-  .mobile-menu a.mono{
-    padding:14px 0;
-    border-bottom:1px solid var(--line);
-    font-size:0.78rem;
-    color:var(--ink-2);
-  }
-  .mobile-menu .mobile-cta{
-    margin-top:18px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
   @media (max-width:760px){
     nav.links{display:none;}
-    .nav-cta{display:none;}
-    .nav-toggle{display:flex;}
-    .mobile-menu{display:flex;}
-  }
-  @media (min-width:761px){
-    .mobile-menu{display:none !important;}
   }
 
   section{position:relative; z-index:1;}
@@ -712,26 +648,10 @@
     <a href="#contact">Contact</a>
   </nav>
   <div class="nav-cta">
-    <a href="Loidymar_Cent_PDS.pdf" download class="btn btn-ghost">Download PDS</a>
+    <a href="Loidymar_Cent_PDS.pdf" download class="btn btn-ghost">PDS</a>
     <a href="Loidymar_Cent_CV.pdf" download class="btn btn-solid">Download CV</a>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-    <span></span><span></span><span></span>
-  </button>
 </header>
-
-<nav class="mobile-menu" id="mobileMenu">
-  <a class="mono" href="#about">Profile</a>
-  <a class="mono" href="#journey">Journey</a>
-  <a class="mono" href="#credentials">Credentials</a>
-  <a class="mono" href="#skills">Skills</a>
-  <a class="mono" href="#docs">Documents</a>
-  <a class="mono" href="#contact">Contact</a>
-  <div class="mobile-cta">
-    <a href="Loidymar_Cent_PDS.pdf" download class="btn btn-ghost">Download PDS</a>
-    <a href="Loidymar_Cent_CV.pdf" download class="btn btn-solid">Download CV</a>
-  </div>
-</nav>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -1106,26 +1026,10 @@
   let lastY = window.scrollY;
   const navEl = document.querySelector('header.nav');
   window.addEventListener('scroll', ()=>{
-    if(navEl.classList.contains('menu-open')) return;
     const y = window.scrollY;
     if(y > lastY && y > 160){ navEl.style.transform = 'translateY(-110%)'; }
     else { navEl.style.transform = 'translateY(0)'; }
     lastY = y;
-  });
-
-  // mobile menu toggle
-  const navToggle = document.getElementById('navToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  navToggle.addEventListener('click', ()=>{
-    const isOpen = navEl.classList.toggle('menu-open');
-    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    navEl.style.transform = 'translateY(0)';
-  });
-  mobileMenu.querySelectorAll('a').forEach(a=>{
-    a.addEventListener('click', ()=>{
-      navEl.classList.remove('menu-open');
-      navToggle.setAttribute('aria-expanded','false');
-    });
   });
 </script>
 
